@@ -1,0 +1,138 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "!/node_modules/**"
+    ],
+    "configurations": [
+        {
+            "name": "Mocha All",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+            "args": [
+                "-r",
+                "ts-node/register",
+                "--timeout",
+                "999999",
+                "--colors",
+                "${workspaceFolder}/tests/all.tests.ts",
+            ],
+            "internalConsoleOptions": "neverOpen",
+            "protocol": "inspector",
+        },
+        {
+            "name": "mgmtClient unit tests",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+            "args": [
+                "-r",
+                "ts-node/register",
+                "--no-timeout",
+                "--colors",
+                "${workspaceFolder}/tests/mgmtClient.unit.tests.ts",
+            ],
+            "internalConsoleOptions": "neverOpen",
+            "protocol": "inspector",
+        },
+        {
+            "name": "newMgmtClient unit tests",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+            "args": [
+                "-r",
+                "ts-node/register",
+                "--no-timeout",
+                "--colors",
+                "${workspaceFolder}/tests/newMgmtClient.unit.tests.ts",
+            ],
+            "internalConsoleOptions": "neverOpen",
+            "protocol": "inspector",
+        },
+        {
+            "name": "mgmtClient UCS unit tests",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+            "args": [
+                "-r",
+                "ts-node/register",
+                "--no-timeout",
+                "--colors",
+                "${workspaceFolder}/tests/mgmtClient_UCS_unit.tests.ts",
+            ],
+            "internalConsoleOptions": "neverOpen",
+            "protocol": "inspector",
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Mocha F5Device IPv6 integration tests",
+            "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+            "args": [
+                "-r",
+                "ts-node/register",
+                "--timeout",
+                "999999",
+                "--colors",
+                "${workspaceFolder}/tests/ipv6.int.tests.ts",
+            ],
+            "internalConsoleOptions": "neverOpen",
+            "protocol": "inspector",
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Mocha F5Device file upload/download tests",
+            "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+            "args": [
+                "-r",
+                "ts-node/register",
+                "--timeout",
+                "999999",
+                "--colors",
+                "${workspaceFolder}/tests/fileMgmt.int.tests.ts",
+            ],
+            "internalConsoleOptions": "neverOpen",
+            "protocol": "inspector",
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "atc versions client unit",
+            "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+            "args": [
+                "-r",
+                "ts-node/register",
+                "--timeout",
+                "999999",
+                "--colors",
+                "${workspaceFolder}/tests/atcVersionsClient.unit.tests.ts",
+            ],
+            "internalConsoleOptions": "neverOpen",
+            "protocol": "inspector",
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "node",
+            "name": "Mocha F5Device UCS integration tests",
+            "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+            "args": [
+                "-r",
+                "ts-node/register",
+                "--timeout",
+                "999999",
+                "--colors",
+                "${workspaceFolder}/tests/f5Device_ucs.int.tests.ts",
+            ],
+            "internalConsoleOptions": "neverOpen",
+            "protocol": "inspector",
+        }
+    ]
+}

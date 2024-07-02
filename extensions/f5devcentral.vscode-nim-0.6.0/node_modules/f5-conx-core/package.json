@@ -1,0 +1,80 @@
+{
+    "name": "f5-conx-core",
+    "author": "F5 Networks",
+    "version": "0.10.0",
+    "description": "F5 SDK for JavaScript with Typescript type definitions",
+    "license": "SEE LICENSE IN LICENSE.txt",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "tags": [
+        "f5",
+        "sdk",
+        "node",
+        "javascript",
+        "typescript"
+    ],
+    "keywords": [
+        "f5",
+        "sdk",
+        "node",
+        "javascript",
+        "typescript"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/f5devcentral/f5-conx-core.git"
+    },
+    "bugs": {
+        "url": "https://github.com/f5devcentral/f5-conx-core/issues"
+    },
+    "scripts": {
+        "lint": "tsc --noEmit && eslint 'src/**/*.{js,ts,tsx}' 'tests/**/*.{js,ts,tsx}'",
+        "watch": "tsc -watch -p ./",
+        "test": "nyc mocha -r ts-node/register \"tests/all.tests.ts\"",
+        "build-code-docs": "typedoc --out code_docs src",
+        "build-package": "tsc"
+    },
+    "dependencies": {
+        "@szmarczak/http-timer": "^4.0.5",
+        "axios": "^0.21.1"
+    },
+    "devDependencies": {
+        "@types/assert": "^1.5.4",
+        "@types/mocha": "^8.2.2",
+        "@types/node": "^14.14.37",
+        "@types/sinon": "^9.0.11",
+        "@typescript-eslint/eslint-plugin": "^4.20.0",
+        "@typescript-eslint/parser": "^4.20.0",
+        "assert": "^2.0.0",
+        "eslint": "^7.23.0",
+        "mocha": "^8.3.2",
+        "nock": "^13.0.11",
+        "nyc": "^15.1.0",
+        "sinon": "^10.0.0",
+        "ts-node": "^9.0.0",
+        "typedoc": "^0.20.34",
+        "typescript": "^4.2.3",
+        "vscode-test-adapter-remoting-util": "^0.12.0"
+    },
+    "nyc": {
+        "check-coverage": true,
+        "lines": 80,
+        "functions": 80,
+        "branches": 80,
+        "statements": 80,
+        "reporter": [
+            "html",
+            "text"
+        ],
+        "cache": false
+    },
+    "eslintConfig": {
+        "parser": "@typescript-eslint/parser",
+        "extends": [
+            "plugin:@typescript-eslint/recommended"
+        ]
+    },
+    "mocha": {
+        "timeout": 40000
+    }
+}

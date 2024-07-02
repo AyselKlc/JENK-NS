@@ -1,0 +1,351 @@
+{
+	"name": "vscode-nim",
+	"displayName": "F5 NIM",
+	"description": "NGINX Instance Manager",
+	"version": "0.6.0",
+	"license": "Apache-2.0",
+	"publisher": "F5DevCentral",
+	"icon": "images/nim_logo.png",
+	"homepage": "https://github.com/f5devcentral/vscode-nim",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/f5devcentral/vscode-nim"
+	},
+	"bugs": {
+		"url": "https://github.com/f5devcentral/vscode-nim/issues"
+	},
+	"engines": {
+		"vscode": "^1.52.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"*"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"snippets": [
+			{
+				"language": "json",
+				"path": "./snippets.json"
+			}
+		],
+		"configuration": {
+			"title": "f5-nim",
+			"properties": {
+				"f5.nim.hosts": {
+					"type": "array",
+					"description": "NIM Hosts details",
+					"items": {
+						"type": "object",
+						"properties": {
+							"device": {
+								"type": "string",
+								"description": "nim to connect to",
+								"pattern": "^[\\w-.]+$"
+							},
+							"label": {
+								"type": "string"
+							},
+							"port": {
+								"type": "number",
+								"description": "port to connect to nginx host"
+							},
+							"auth": {
+								"basic": "string",
+								"cert": "string",
+								"token": "string"
+							},
+							"system": {
+								"type": "object"
+							},
+							"license": {
+								"type": "object"
+							}
+						}
+					},
+					"required": [
+						"device"
+					]
+				},
+				"f5.nim.logLevel": {
+					"type": "string",
+					"enum": [
+						"DEBUG",
+						"INFO"
+					],
+					"default": "INFO",
+					"scope": "resource",
+					"description": "NGINX OUTPUT log level"
+				}
+			}
+		},
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "f5-nim-view-container",
+					"title": "NIM",
+					"icon": "images/NGINX-Instance-Manager-icon_cutout.svg"
+				}
+			]
+		},
+		"views": {
+			"f5-nim-view-container": [
+				{
+					"id": "hostsView",
+					"name": "HOSTS"
+				},
+				{
+					"id": "inventoryView",
+					"name": "INVENTORY",
+					"when": "nim.connected"
+				},
+				{
+					"id": "scanView",
+					"name": "SCAN",
+					"when": "nim.connected"
+				}
+			]
+		},
+		"commands": [
+			{
+				"command": "nim.refreshHostsTree",
+				"title": "Refresh Devices",
+				"category": "NIM",
+				"icon": "$(refresh)"
+			},
+			{
+				"command": "nim.addHost",
+				"title": "Add Host",
+				"category": "NIM",
+				"icon": "$(add)"
+			},
+			{
+				"command": "nim.config",
+				"title": "Hosts Config",
+				"category": "NIM",
+				"icon": "$(gear)"
+			},
+			{
+				"command": "nim.editHost",
+				"title": "Edit Host",
+				"category": "NIM",
+				"icon": "$(edit)"
+			},
+			{
+				"command": "nim.removeHost",
+				"title": "Remove Host",
+				"category": "NIM",
+				"icon": "$(trash)"
+			},
+			{
+				"command": "nim.connect",
+				"title": "Connect to NIM",
+				"category": "NIM"
+			},
+			{
+				"command": "nim.disConnect",
+				"title": "Dis-Connect",
+				"category": "NIM",
+				"icon": "$(debug-disconnect)"
+			},
+			{
+				"command": "nginx.refreshInventory",
+				"title": "Refresh Inventory",
+				"category": "NIM",
+				"icon": "$(refresh)"
+			},
+			{
+				"command": "nginx.newConfig",
+				"title": "New Config",
+				"category": "NIM",
+				"icon": "images/nim_newFile.svg"
+			},
+			{
+				"command": "nim.resetConfigs",
+				"title": "Reset Config",
+				"category": "NIM",
+				"icon": "images/nim_reset.svg"
+			},
+			{
+				"command": "nginx.saveConfigFile",
+				"title": "Save Config",
+				"category": "NIM",
+				"icon": "images/nim_save.svg"
+			},
+			{
+				"command": "nginx.deleteConfig",
+				"title": "Delete Config",
+				"category": "NIM",
+				"icon": "images/nim_trash.svg"
+			},
+			{
+				"command": "nginx.analyzeConfigs",
+				"title": "Analyze Configs",
+				"category": "NIM",
+				"icon": "images/nim_analyze.svg"
+			},
+			{
+				"command": "nginx.publishConfigs",
+				"title": "Publish Configs",
+				"category": "NIM",
+				"icon": "images/nim_upload_arrow.svg"
+			},
+			{
+				"command": "nginx.refreshScan",
+				"title": "Refresh Scan",
+				"category": "NIM",
+				"icon": "$(refresh)"
+			},
+			{
+				"command": "nim.scanStart",
+				"title": "Start Scan",
+				"category": "NIM",
+				"icon": "images/nim_scan.svg"
+			},
+			{
+				"command": "nginx.deleteScanServer",
+				"title": "Delete",
+				"category": "NIM",
+				"icon": "images/nim_trash.svg"
+			}
+		],
+		"menus": {
+			"editor/title": [
+				{
+					"command": "nim.resetConfigs",
+					"group": "navigation",
+					"when": "resourceScheme == ngx"
+				},
+				{
+					"command": "nginx.saveConfigFile",
+					"group": "navigation",
+					"when": "resourceScheme == ngx"
+				},
+				{
+					"command": "nginx.analyzeConfigs",
+					"group": "navigation",
+					"when": "resourceScheme == ngx"
+				},
+				{
+					"command": "nginx.publishConfigs",
+					"group": "navigation",
+					"when": "resourceScheme == ngx"
+				}
+			],
+			"view/title": [
+				{
+					"command": "nim.config",
+					"when": "view == hostsView",
+					"group": "navigation"
+				},
+				{
+					"command": "nim.addHost",
+					"when": "view == hostsView",
+					"group": "navigation"
+				},
+				{
+					"command": "nim.refreshHostsTree",
+					"when": "view == hostsView",
+					"group": "navigation"
+				},
+				{
+					"command": "nginx.refreshInventory",
+					"when": "view == inventoryView",
+					"group": "navigation"
+				},
+				{
+					"command": "nginx.refreshScan",
+					"when": "view == scanView",
+					"group": "navigation"
+				}
+			],
+			"view/item/context": [
+				{
+					"command": "nim.editHost",
+					"when": "view == hostsView && viewItem == host",
+					"group": "inline"
+				},
+				{
+					"command": "nim.disConnect",
+					"when": "view == hostsView && viewItem == host",
+					"group": "inline"
+				},
+				{
+					"command": "nim.removeHost",
+					"when": "view == hostsView && viewItem == host",
+					"group": "inline"
+				},
+				{
+					"command": "nginx.newConfig",
+					"when": "view == inventoryView && viewItem == instance",
+					"group": "inline"
+				},
+				{
+					"command": "nim.resetConfigs",
+					"when": "view == inventoryView && viewItem == instance",
+					"group": "inline"
+				},
+				{
+					"command": "nginx.analyzeConfigs",
+					"when": "view == inventoryView && viewItem == instance",
+					"group": "inline"
+				},
+				{
+					"command": "nginx.publishConfigs",
+					"when": "view == inventoryView && viewItem == instance",
+					"group": "inline"
+				},
+				{
+					"command": "nginx.deleteConfig",
+					"when": "view == inventoryView && viewItem == config",
+					"group": "inline"
+				},
+				{
+					"command": "nim.scanStart",
+					"when": "view == scanView && viewItem == scanStatusHeader",
+					"group": "inline"
+				},
+				{
+					"command": "nginx.deleteScanServer",
+					"when": "view == scanView && viewItem == scanServer",
+					"group": "inline"
+				}
+			]
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"lint": "eslint . --ext .ts,.tsx",
+		"watch": "tsc -watch -p ./"
+	},
+	"devDependencies": {
+		"@types/node": "^14.14.37",
+		"@types/vscode": "^1.52.0",
+		"@typescript-eslint/eslint-plugin": "^4.21.0",
+		"@typescript-eslint/parser": "^4.21.0",
+		"eslint": "^7.24.0",
+		"typescript": "^4.2.4"
+	},
+	"dependencies": {
+		"@szmarczak/http-timer": "^4.0.5",
+		"@types/js-yaml": "^4.0.0",
+		"axios": "^0.21.1",
+		"f5-conx-core": "github:dumpysquare/f5-conx-core",
+		"js-yaml": "^4.0.0",
+		"keytar": "^7.6.0"
+	},
+	"__metadata": {
+		"id": "9303707a-a9f3-4ea2-9c0a-d21840d6ec1a",
+		"publisherId": "e3b9be12-a08f-4352-bbd2-eda98c86f1ee",
+		"publisherDisplayName": "F5DevCentral",
+		"targetPlatform": "undefined",
+		"updated": false,
+		"isPreReleaseVersion": false,
+		"hasPreReleaseVersion": false,
+		"installedTimestamp": 1715067181736,
+		"pinned": false
+	}
+}
